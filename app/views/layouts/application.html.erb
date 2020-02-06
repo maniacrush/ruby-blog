@@ -19,20 +19,23 @@
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right align-baseline">
             <% if user_signed_in? %>
-              <li>
-                <%= link_to "Account", edit_user_registration_path, class: 'btn btn-info' %>
+              <li class="mr-2 align-middle p-2">
+                <p>Signed in as <b><%= current_user.email %></b></p>
               </li>
-              <li>
-                <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-dark' %>
+              <li class="mr-1">
+                <%= link_to "Account", edit_user_registration_path, class: 'btn btn-info text-white' %>
+              </li>
+              <li class="mr-1">
+                <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-dark text-white' %>
               </li>
             <% else %>
               <li>
-                <%= link_to "Sign In", new_user_session_path, class: 'btn btn-default' %>
+                <%= link_to "Sign In", new_user_session_path, class: 'btn btn-default bg-primary text-white mr-2' %>
               </li>
               <li>
-                <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-default' %>
+                <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-default bg-dark text-white' %>
               </li>
             <% end %>
           </ul>

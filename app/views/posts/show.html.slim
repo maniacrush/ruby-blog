@@ -1,17 +1,19 @@
 p#notice = notice
 
-p
-  strong Title:
-  = @post.title
-p
-  strong Content:
-  = @post.content
-p
-  strong User:
-  = @post.user.email
+= link_to 'Back to all posts', posts_path, class: 'btn btn-light btn-sm mr-1 mb-3'
+div.post-section.mb-4
+  h1.text-center = @post.title
+  p.post-author.badge.badge-secondary.mb-1 = @post.user.email
+  p.post-content.p-3.border.bg-light.text-dark.mb-2 = @post.content
+  = link_to 'Edit', edit_post_path(@post), class: 'btn btn-info btn-sm mr-1 text-white'
 
-=> link_to 'Edit', edit_post_path(@post)
-'|
-=< link_to 'Back', posts_path
-'|
-=< link_to 'Add a comment', new_comment_path
+h2 Comments:
+div#comments.pl-3.mb-2
+  - @post.comments.each do |comment|
+    div.comment-section.mb-4
+      p.comment-author.badge.badge-secondary.mb-1 = comment.user.email
+      p.comment-content.p-3.border.bg-light.text-dark.mb-2 = comment.content
+      - if user_signed_in? && comment.user.id == current_user.id
+          = link_to 'Edit', edit_comment_path(comment), class: 'btn btn-info btn-sm text-white mr-1'
+          = link_to 'Delete', comment, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger text-white btn-sm'
+  = render "comments/new", :comment => current_user.comments.new({:post_id => @post.id})
