@@ -60,7 +60,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "slim-rails"
 gem 'bootstrap', '~> 4.4.1'
+
+gem 'activeadmin'
 gem 'devise'
+
 gem 'jquery-rails'
 gem 'ruby-debug-ide'
 gem 'debase'
+
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
