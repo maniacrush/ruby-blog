@@ -2,13 +2,14 @@ h1 Listing posts
 
 - @posts.each do |post|
   h2 = post.title
-  p = post.content
   div
     b Author: 
     = post.user.email
     br
+    p.alert.alert-secondary = post.content
+    br
     = link_to 'Show', post, class: 'btn btn-default'
-    - if user_signed_in? && post.user.email == current_user.email
+    - if user_signed_in? && post.user.id == current_user.id
         = link_to 'Edit', edit_post_path(post), class: 'btn btn-info'
         = link_to 'Destroy', post, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
 
