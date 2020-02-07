@@ -3,8 +3,10 @@ h1 Listing comments
 table
   thead
     tr
+      th Id
       th User
-      th Post
+      th Comment Entity
+      th Commented Entity Id
       th Content
       th
       th
@@ -13,8 +15,10 @@ table
   tbody
     - @comments.each do |comment|
       tr
+        td = comment.id
         td = comment.user_id
-        td = comment.post_id
+        td = comment.imageable_type
+        td = comment.imageable_id
         td = comment.content
         td = link_to 'Show', comment
         td = link_to 'Edit', edit_comment_path(comment)

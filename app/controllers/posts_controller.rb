@@ -51,6 +51,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def comments
+    Comment.find().where("imageable_id = ? and imageable_type = ?", params[:id], @post.class.name)
+  end
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy

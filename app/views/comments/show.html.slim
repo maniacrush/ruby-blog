@@ -4,12 +4,12 @@ p
   strong User:
   = @comment.user_id
 p
-  strong Post:
-  = @comment.post_id
+  strong Related to:
+  = @comment.imageable_type
 p
   strong Content:
   = @comment.content
 
 => link_to 'Edit', edit_comment_path(@comment)
 '|
-=< link_to 'Back', comments_path
+=< link_to 'Back', @comment.imageable

@@ -8,7 +8,8 @@
 
   = f.label :content, 'Add new comment:'
 
-  = f.hidden_field :post_id, value: comment.post.id
+  = f.hidden_field :imageable_id, value: imageable_id
+  = f.hidden_field :imageable_type, value: imageable_type
 
   .field
     = f.text_area :content

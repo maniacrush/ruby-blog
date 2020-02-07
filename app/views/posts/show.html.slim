@@ -9,11 +9,15 @@ div.post-section.mb-4
 
 h2 Comments:
 div#comments.pl-3.mb-2
-  - @post.comments.each do |comment|
+  - unless @post.comments.count > 0
+    p
+      b No comments yet.
+  - @post.comments.reverse.each do |comment|
     div.comment-section.mb-4
       p.comment-author.badge.badge-secondary.mb-1 = comment.user.email
       p.comment-content.p-3.border.bg-light.text-dark.mb-2 = comment.content
       - if user_signed_in? && comment.user.id == current_user.id
           = link_to 'Edit', edit_comment_path(comment), class: 'btn btn-info btn-sm text-white mr-1'
           = link_to 'Delete', comment, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger text-white btn-sm'
-  = render "comments/new", :comment => current_user.comments.new({:post_id => @post.id})
+  - if user_signed_in?
+    = render "comments/new", :comment => Comment.new({:user_id => current_user.id}), :imageable_id => @post.id, :imageable_type => @post.class.name

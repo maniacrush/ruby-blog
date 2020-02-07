@@ -1,17 +1,18 @@
-h1 Listing posts
+h1.text-center Listing posts
 
-- @posts.each do |post|
-  h2 = post.title
-  div
-    b Author: 
-    = post.user.email
-    br
-    p.alert.alert-secondary = post.content
-    br
-    = link_to 'Show', post, class: 'btn btn-default'
-    - if user_signed_in? && post.user.id == current_user.id
-        = link_to 'Edit', edit_post_path(post), class: 'btn btn-info'
-        = link_to 'Destroy', post, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+- @posts.reverse.each do |post|
+  div.post-container.mb-5
+    b
+      = post.user.email
+    |, 
+    = post.created_at
+    div
+      h2 = post.title
+      p.alert.alert-secondary = post.content
+      = link_to 'Show', post, class: 'btn btn-default'
+      - if user_signed_in? && post.user.id == current_user.id
+          = link_to 'Edit', edit_post_path(post), class: 'btn btn-info'
+          = link_to 'Destroy', post, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
 
 - if user_signed_in?
     = link_to 'New Post', new_post_path, class: 'btn btn-default'
